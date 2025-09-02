@@ -64,17 +64,17 @@ python docker_log_monitor.py --config custom_config.json
 
 ## Configuration Options
 
-- **containers**: List of container names to monitor (empty = all containers)
-- **log_levels**: Log levels to trigger notifications (INFO, WARN, ERROR)
-- **keywords**: Keywords to filter log messages
-- **check_interval**: Seconds between log checks (default: 5)
-- **error_threshold**: Number of occurrences before notification (default: 3)
-- **cooldown_minutes**: Minutes to wait before sending duplicate notifications (default: 30)
-- **deduplication_window**: Seconds to keep error history for deduplication (default: 300)
-- **max_memory_entries**: Maximum number of error entries to keep in memory (default: 1000)
-- **cleanup_interval**: Seconds between memory cleanup cycles (default: 3600)
-- **blacklist**: Blacklist configuration
-  - **keywords**: List of keywords to exclude from notifications
-  - **patterns**: List of regex patterns to exclude from notifications
-  - **containers**: List of container names to exclude from monitoring
-- **mattermost**: Mattermost notification settings
+- **containers**：要监控的容器名称列表（空表示所有容器）
+- **log_levels**：触发通知的日志级别（INFO、WARN、ERROR）
+- **keywords**：用于过滤日志消息的关键字
+- **check_interval**：日志检查间隔（秒）（默认值：5）
+- **error_threshold**：通知前的错误发生次数（默认值：3）
+- **cooldown_minutes**：发送重复通知前的等待分钟数（默认值：30）
+- **deduplication_window**：保留重复数据删除错误历史记录的秒数（默认值：300）
+- **max_memory_entries**：内存中保留的最大错误条目数（默认值：1000）
+- **cleanup_interval**：内存清理周期间隔（秒）（默认值：3600）
+- **blacklist**：黑名单配置
+  - **keywords**：要排除的关键字列表来自通知
+  - **patterns**：要从通知中排除的正则表达式列表
+  - **containers**：要从监控中排除的容器名称列表
+- **mattermost**：Mattermost 通知设置
