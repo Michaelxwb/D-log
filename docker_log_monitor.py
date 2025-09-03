@@ -48,7 +48,7 @@ class DockerLogMonitor:
                 "userid": "ddabaxgumvfidnhbwwnehpgjaq"
             },
             "check_interval": 5,
-            "error_threshold": 3,
+            "error_threshold": 5,
             "cooldown_minutes": 30,
             "deduplication_window": 300,
             "max_memory_entries": 1000,
@@ -286,14 +286,11 @@ class DockerLogMonitor:
                         log_parts = log_line.split(' ', 1)
                         clean_log = log_parts[1] if len(log_parts) > 1 else log_line
                         
-                        # Format timestamp
-                        timestamp_str = ""
-                        if len(log_parts) > 1:
-                            try:
-                                ts = datetime.fromisoformat(log_parts[0].replace('Z', '+00:00'))
-                                timestamp_str = ts.strftime('%Y-%m-%d %H:%M:%S')
-                            except:
-                                timestamp_str = log_parts[0]
+                        # Use current system time (China timezone)
+                        from datetime import timezone, timedelta
+                        china_offset = timezone(timedelta(hours=8))
+                        current_time = datetime.now(china_offset)
+                        timestamp_str = current_time.strftime('%Y-%m-%d %H:%M:%S CST')
                         
                         message = f"""## 🚨 Docker Alert
 
@@ -305,6 +302,7 @@ class DockerLogMonitor:
 ```
 {clean_log}
 ```"""
+                        print("===========================================================\r\n {} \r\n".format(message))
                         self.send_msg(message)
         
         # Clean up old error entries periodically
