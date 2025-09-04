@@ -18,6 +18,9 @@
     "containers": []
   },
   "notifications": {
+    "terminal": {
+      "enabled": true
+    },
     "mattermost": {
       "enabled": false,
       "server_url": "dim2.sangfor.com",
@@ -40,8 +43,8 @@
       "ssl": true
     }
   },
-  "check_interval": 5,
-  "error_threshold": 3,
+  "check_interval": 2,
+  "error_threshold": 2,
   "cooldown_minutes": 30,
   "deduplication_window": 300,
   "max_memory_entries": 1000,

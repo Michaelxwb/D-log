@@ -52,22 +52,21 @@ class DockerLogMonitorApp:
 ```
 {error['context']}
 ```"""
-            print(f"\n{title}\n{message}\n")
-            # for provider in self.notification_providers:
-            #     try:
-            #         success = provider.send(
-            #             title=title,
-            #             message=message,
-            #             container=error['container'],
-            #             timestamp=error['timestamp'],
-            #             count=error['count']
-            #         )
-            #         if success:
-            #             self.logger.info(f"✅ {provider.get_name()} 通知发送成功")
-            #         else:
-            #             self.logger.warning(f"⚠️ {provider.get_name()} 通知发送失败")
-            #     except Exception as e:
-            #         self.logger.error(f"❌ {provider.get_name()} 通知异常: {e}")
+            for provider in self.notification_providers:
+                try:
+                    success = provider.send(
+                        title=title,
+                        message=message,
+                        container=error['container'],
+                        timestamp=error['timestamp'],
+                        count=error['count']
+                    )
+                    if success:
+                        self.logger.info(f"✅ {provider.get_name()} 通知发送成功")
+                    else:
+                        self.logger.warning(f"⚠️ {provider.get_name()} 通知发送失败")
+                except Exception as e:
+                    self.logger.error(f"❌ {provider.get_name()} 通知异常: {e}")
     
     def run(self):
         """运行监控应用"""

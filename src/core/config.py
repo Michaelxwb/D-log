@@ -33,6 +33,9 @@ class ConfigManager:
                 "containers": []
             },
             "notifications": {
+                "terminal": {
+                    "enabled": True
+                },
                 "mattermost": {
                     "enabled": False,
                     "server_url": "",

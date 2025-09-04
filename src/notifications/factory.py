@@ -2,6 +2,7 @@ from typing import Dict, Any, List
 from notifications.base import NotificationProvider
 from notifications.mattermost import MattermostProvider
 from notifications.email import EmailProvider
+from notifications.terminal import TerminalNotificationProvider
 
 
 class NotificationFactory:
@@ -10,6 +11,7 @@ class NotificationFactory:
     _providers = {
         'mattermost': MattermostProvider,
         'email': EmailProvider,
+        'terminal': TerminalNotificationProvider,
     }
     
     @classmethod

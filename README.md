@@ -24,13 +24,13 @@ pip install -r requirements.txt
 ### 2. 创建配置文件
 
 ```bash
-python run.py --setup
+python src/main.py --setup
 ```
 
 ### 3. 启动监控
 
 ```bash
-python run.py
+python src/main.py
 ```
 
 ## 📋 使用方式
@@ -38,16 +38,16 @@ python run.py
 ### 基本命令
 ```bash
 # 启动监控
-python run.py
+python src/main.py
 
 # 创建默认配置文件
-python run.py --setup
+python src/main.py --setup
 
 # 使用自定义配置文件
-python run.py --config custom_config.json
+python src/main.py --config custom_config.json
 
 # 查看帮助
-python run.py --help
+python src/main.py --help
 ```
 
 ### 基础配置示例
@@ -267,7 +267,7 @@ D-log/
 ├── tests/                   # 测试目录
 ├── docs/                    # 文档目录
 ├── examples/                # 示例配置
-├── run.py                   # 统一入口脚本
+├── src/main.py              # 统一入口脚本
 ├── config.json              # 配置文件
 └── requirements.txt         # 依赖列表
 ```
@@ -513,7 +513,7 @@ python -c "from mattermostdriver import Driver; Driver({'url': 'your-server', 't
 git clone https://github.com/your-repo/docker-log-monitor.git
 cd docker-log-monitor
 pip install -r requirements.txt
-python run.py --config dev_config.json
+python src/main.py --config dev_config.json
 ```
 
 ## 📄 许可证
