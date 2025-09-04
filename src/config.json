@@ -19,10 +19,12 @@
   },
   "notifications": {
     "terminal": {
-      "enabled": true
+      "enabled": true,
+      "format": "markdown"
     },
     "mattermost": {
       "enabled": false,
+      "format": "markdown",
       "server_url": "dim2.sangfor.com",
       "token": "hnq1yj4yx3833nk9pn53srhtze",
       "channel_id": "1kaj86kbkpgtzn6gaoybepqp7w",
@@ -32,6 +34,7 @@
     },
     "email": {
       "enabled": false,
+      "format": "text",
       "smtp_server": "smtp.gmail.com",
       "smtp_port": 465,
       "username": "your-email@gmail.com",

@@ -1,6 +1,7 @@
 from typing import Dict, Any
 from mattermostdriver import Driver
 from .base import NotificationProvider
+from .message_formatter import MessageFormatter
 
 
 class MattermostProvider(NotificationProvider):
@@ -9,6 +10,7 @@ class MattermostProvider(NotificationProvider):
     def __init__(self, config: Dict[str, Any]):
         super().__init__(config)
         self.driver = None
+        self.format_type = config.get('format', 'markdown')  # 'markdown' or 'text'
     
     def _get_driver(self):
         """获取Mattermost驱动实例"""
@@ -27,7 +29,24 @@ class MattermostProvider(NotificationProvider):
         """发送Mattermost通知"""
         try:
             driver = self._get_driver()
-            full_message = f"## {title}\n\n{message}"
+            
+            # 使用格式化器生成消息
+            formatted_message = MessageFormatter.format_message(
+                self.format_type,
+                title=title,
+                container=kwargs.get('container', 'unknown'),
+                count=kwargs.get('count', 1),
+                threshold=kwargs.get('threshold', 1),
+                timestamp=kwargs.get('timestamp', 'unknown'),
+                context_lines=len(message.split('\n')) if message else 0,
+                context=message or "无上下文"
+            )
+            
+            # 对于Mattermost，始终使用markdown格式标题
+            if self.format_type == 'markdown':
+                full_message = f"## {title}\n\n{formatted_message}"
+            else:
+                full_message = f"**{title}**\n\n{formatted_message}"
             
             driver.posts.create_post({
                 'channel_id': self.config['channel_id'],

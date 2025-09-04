@@ -34,10 +34,12 @@ class ConfigManager:
             },
             "notifications": {
                 "terminal": {
-                    "enabled": True
+                    "enabled": True,
+                    "format": "text"
                 },
                 "mattermost": {
                     "enabled": False,
+                    "format": "markdown",
                     "server_url": "",
                     "token": "",
                     "channel_id": "",
@@ -47,6 +49,7 @@ class ConfigManager:
                 },
                 "email": {
                     "enabled": False,
+                    "format": "text",
                     "smtp_server": "",
                     "smtp_port": 465,
                     "username": "",

@@ -43,23 +43,17 @@ class DockerLogMonitorApp:
         
         for error in errors:
             title = f"🚨 Docker错误 - {error['container']}"
-            message = f"""**📦 容器:** `{error['container']}`
-**🔢 计数:** `{error['count']}/{error['threshold']}` ✅
-**⏰ 时间:** `{error['timestamp']}`
-**📊 上下文行数:** `{len(error['context'].split(chr(10)))}`
-
-**📄 完整错误上下文:**
-```
-{error['context']}
-```"""
+            context = error['context']
+            
             for provider in self.notification_providers:
                 try:
                     success = provider.send(
                         title=title,
-                        message=message,
+                        message=context,
                         container=error['container'],
                         timestamp=error['timestamp'],
-                        count=error['count']
+                        count=error['count'],
+                        threshold=error['threshold']
                     )
                     if success:
                         self.logger.info(f"✅ {provider.get_name()} 通知发送成功")
