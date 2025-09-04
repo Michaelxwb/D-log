@@ -1,10 +1,12 @@
 {
   "containers": [],
-  "log_levels": ["ERROR", "WARN"],
+  "log_levels": [
+    "ERROR",
+    "WARN"
+  ],
   "keywords": [],
   "blacklist": {
-    "keywords": [
-    ],
+    "keywords": [],
     "patterns": [
       ".*WARNING/MainProcess.*celery.*consumer.*",
       ".*CPendingDeprecationWarning.*broker_connection_retry.*",
@@ -15,18 +17,41 @@
     ],
     "containers": []
   },
-  "mattermost": {
-    "server_url": "dim2.sangfor.com",
-    "token": "hnq1yj4yx3833nk9pn53srhtze",
-    "channel_id": "1kaj86kbkpgtzn6gaoybepqp7w",
-    "scheme": "https",
-    "port": 443,
-    "userid": "ddabaxgumvfidnhbwwnehpgjaq"
+  "notifications": {
+    "mattermost": {
+      "enabled": false,
+      "server_url": "dim2.sangfor.com",
+      "token": "hnq1yj4yx3833nk9pn53srhtze",
+      "channel_id": "1kaj86kbkpgtzn6gaoybepqp7w",
+      "scheme": "https",
+      "port": 443,
+      "userid": "ddabaxgumvfidnhbwwnehpgjaq"
+    },
+    "email": {
+      "enabled": false,
+      "smtp_server": "smtp.gmail.com",
+      "smtp_port": 465,
+      "username": "your-email@gmail.com",
+      "password": "your-app-password",
+      "from_email": "your-email@gmail.com",
+      "to_emails": [
+        "admin@example.com"
+      ],
+      "ssl": true
+    }
   },
   "check_interval": 5,
-  "error_threshold": 10,
+  "error_threshold": 3,
   "cooldown_minutes": 30,
   "deduplication_window": 300,
   "max_memory_entries": 1000,
-  "cleanup_interval": 3600
+  "cleanup_interval": 3600,
+  "context_settings": {
+    "max_context_lines": 25,
+    "stack_trace_lines": 15,
+    "include_surrounding_lines": 5,
+    "max_log_length": 8000,
+    "buffer_size": 1000,
+    "enable_smart_truncation": true
+  }
 }
