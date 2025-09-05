@@ -24,7 +24,11 @@ class ConfigManager:
     def get_default_config(self) -> Dict[str, Any]:
         """获取默认配置"""
         return {
-            "containers": [],
+            "local_monitoring": {
+                "enabled": True,
+                "containers": []
+            },
+            "remote_servers": [],
             "log_levels": ["ERROR", "WARN"],
             "keywords": [],
             "blacklist": {
@@ -72,6 +76,11 @@ class ConfigManager:
                 "max_log_length": 8000,
                 "buffer_size": 1000,
                 "enable_smart_truncation": True
+            },
+            "ssh_settings": {
+                "timeout": 10,
+                "max_connections": 5,
+                "connection_pool_size": 3
             }
         }
     

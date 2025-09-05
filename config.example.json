@@ -5,11 +5,20 @@
   },
   "remote_servers": [
     {
-      "name": "34.tcp.cpolar.top",
-      "host": "34.tcp.cpolar.top",
+      "name": "server-1",
+      "host": "192.168.1.100",
       "username": "root",
-      "password": "XWBnszbd19940616",
-      "port": 12667,
+      "password": "your_password",
+      "port": 22,
+      "timeout": 10,
+      "containers": ["nginx", "mysql"]
+    },
+    {
+      "name": "server-2",
+      "host": "192.168.1.101",
+      "username": "ubuntu",
+      "key_file": "/path/to/private_key",
+      "port": 22,
       "timeout": 10,
       "containers": []
     }
