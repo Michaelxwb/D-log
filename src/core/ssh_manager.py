@@ -119,20 +119,29 @@ class RemoteDockerManager:
                 
                 stdin, stdout, stderr = ssh.exec_command(cmd, timeout=timeout)
                 
+                # 读取标准输出和错误输出
                 output = stdout.read().decode('utf-8', errors='ignore').strip()
                 error_output = stderr.read().decode('utf-8', errors='ignore').strip()
                 
+                # 检查容器是否存在
                 if error_output and 'No such container' in error_output:
                     self.logger.warning(f"容器 {container_name} 在 {host} 上不存在")
                     return []
                 
-                if not output:
+                # 合并标准输出和错误输出作为日志内容
+                # Docker logs命令有时会将日志输出到stderr而不是stdout
+                combined_output = output
+                if error_output and not output:
+                    combined_output = error_output
+                elif error_output and output:
+                    combined_output = f"{output}\n{error_output}"
+                
+                if not combined_output:
                     return []
                 
-                # 添加时间戳前缀（模拟Docker日志格式）
-                lines = output.split('\n')
-                timestamp = time.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
-                return [f"{timestamp} {line}" for line in lines if line.strip()]
+                # 保留原始Docker日志格式（包含时间戳）
+                lines = combined_output.split('\n')
+                return [line for line in lines if line.strip()]
         
         except Exception as e:
             self.logger.error(f"获取远程容器日志失败 {host}:{container_name} - {e}")

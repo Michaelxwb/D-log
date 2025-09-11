@@ -79,7 +79,7 @@ class DockerLogMonitor:
         for pattern in blacklisted_patterns:
             try:
                 if re.search(pattern, log_line, re.IGNORECASE):
-                    return True
+                    return False
             except re.error:
                 continue
         
@@ -188,6 +188,7 @@ class DockerLogMonitor:
         for i in range(start_idx, min(end_idx, len(logs))):
             if i < len(logs):
                 line = logs[i]
+                # 保留完整的时间戳和日志内容
                 clean_line = line.split(' ', 1)[1] if ' ' in line else line
                 
                 prefix = "  "
